@@ -3,6 +3,7 @@ const formOutput = document.querySelector('.output');
 const textareaInput = document.querySelector('.t');
 const textareaOutput = document.querySelector('.t2');
 const btn = document.querySelector('.btn-secondary');
+
 const userData = {
   data: [],
 };
@@ -22,10 +23,13 @@ formInput.addEventListener('click', (e) => {
   const userText = textareaInput.value;
   userData.data.push(userText);
   formatUserData(userData.data, textareaOutput);
-  e.target.reset();
 });
 
 formOutput.addEventListener('submit', (e) => {
+  e.preventDefault();
+  textareaOutput.innerHTML = '';
+  textareaInput.innerHTML = '';
+  userData.data = [];
   e.target.reset();
 });
 
@@ -44,5 +48,4 @@ btn.addEventListener('click', (e) => {
   const userText = textareaInput.value;
   userData.data.push(userText);
   getNum(userData.data, textareaOutput);
-  e.target.reset();
 });
