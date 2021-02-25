@@ -1,13 +1,8 @@
-const getNum = (...num) => {
-  const result = num.map((n) => `31064700${n.trim()}`);
-  console.log(result.join('\n'));
-};
-getNum('00989689 ', '0098968922');
-
-const formInput = document.querySelector('.input');
+const formInput = document.querySelector('.btn-primary');
 const formOutput = document.querySelector('.output');
-const textareaInput = formInput.querySelector('.t');
+const textareaInput = document.querySelector('.t');
 const textareaOutput = document.querySelector('.t2');
+const btn = document.querySelector('.btn-secondary');
 const userData = {
   data: [],
 };
@@ -22,7 +17,7 @@ const formatUserData = (data, t2) => {
   });
 };
 
-formInput.addEventListener('submit', (e) => {
+formInput.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
@@ -31,5 +26,23 @@ formInput.addEventListener('submit', (e) => {
 });
 
 formOutput.addEventListener('submit', (e) => {
+  e.target.reset();
+});
+
+const getNum = (data, t2) => {
+  data.forEach((i) => {
+    const result = i
+      .split('\n')
+      .map((item) => `31064700${item.trim()}`)
+      .join('\n');
+    t2.innerHTML += result;
+  });
+};
+
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const userText = textareaInput.value;
+  userData.data.push(userText);
+  getNum(userData.data, textareaOutput);
   e.target.reset();
 });
