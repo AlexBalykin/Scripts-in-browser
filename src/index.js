@@ -1,51 +1,55 @@
-const formInput = document.querySelector('.btn-primary');
-const formOutput = document.querySelector('.output');
-const textareaInput = document.querySelector('.t');
-const textareaOutput = document.querySelector('.t2');
-const btn = document.querySelector('.btn-secondary');
+const btnDebt = document.querySelector('.btn-primary');
+const btnNum = document.querySelector('.btn-secondary');
+const btnReset = document.querySelector('.formOutput');
+const textareaInput = document.querySelector('.textareaInput');
+const textareaOutput = document.querySelector('.textareaOutput');
 
 const userData = {
   data: [],
 };
 
-const formatUserData = (data, t2) => {
-  data.forEach((i) => {
+const closeDebt = (input, output) => {
+  const str = output;
+  input.forEach((i) => {
     const result = i
       .split('\n')
       .map((item) => `SELECT db_admin.close_debt_transaction('${item.trim()}');`)
       .join('\n');
-    t2.innerHTML += result;
+    str.innerHTML += result;
   });
 };
 
-formInput.addEventListener('click', (e) => {
+btnDebt.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
-  formatUserData(userData.data, textareaOutput);
+  closeDebt(userData.data, textareaOutput);
+  userData.data = [];
 });
 
-formOutput.addEventListener('submit', (e) => {
+const getNum = (input, output) => {
+  const str = output;
+  input.forEach((i) => {
+    const result = i
+      .split('\n')
+      .map((item) => `31064700${item.trim()}`)
+      .join('\n');
+    str.innerHTML += result;
+  });
+};
+
+btnNum.addEventListener('click', (e) => {
+  e.preventDefault();
+  const userText = textareaInput.value;
+  userData.data.push(userText);
+  getNum(userData.data, textareaOutput);
+  userData.data = [];
+});
+
+btnReset.addEventListener('submit', (e) => {
   e.preventDefault();
   textareaOutput.innerHTML = '';
   textareaInput.innerHTML = '';
   userData.data = [];
   e.target.reset();
-});
-
-const getNum = (data, t2) => {
-  data.forEach((i) => {
-    const result = i
-      .split('\n')
-      .map((item) => `31064700${item.trim()}`)
-      .join('\n');
-    t2.innerHTML += result;
-  });
-};
-
-btn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const userText = textareaInput.value;
-  userData.data.push(userText);
-  getNum(userData.data, textareaOutput);
 });
