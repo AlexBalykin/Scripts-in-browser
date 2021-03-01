@@ -7,7 +7,7 @@ lint:
 	npx eslint .
 
 build:
-	NODE_ENV='production' npx webpack
+	rm -rf dist && NODE_ENV=production npx webpack
 
 serv:
 	npx webpack serve
