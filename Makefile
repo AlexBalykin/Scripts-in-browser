@@ -9,7 +9,7 @@ lint:
 build:
 	NODE_ENV='production' npx webpack
 
-start:
+serv:
 	npx webpack serve
 	
 push:
