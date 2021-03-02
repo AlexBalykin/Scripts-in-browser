@@ -1,9 +1,10 @@
-import Debt from './Modules/Debt';
-import Sql from './Modules/Sql';
+import closeDebt from './modules/debt';
+import getSql from './modules/sql';
+import addDriver from './modules/driver';
 import './index.css';
 
 const btnDebt = document.querySelector('.btn-primary');
-// const btnNum = document.querySelector('.btn-secondary');
+const btnNum = document.querySelector('.btn-secondary');
 const btnSql = document.querySelector('.btn-success');
 const btnReset = document.querySelector('.formOutput');
 const textareaInput = document.querySelector('.textareaInput');
@@ -13,11 +14,19 @@ const userData = {
   data: [],
 };
 
+btnNum.addEventListener('click', (e) => {
+  e.preventDefault();
+  const userText = textareaInput.value;
+  userData.data.push(userText);
+  addDriver(userData.data, textareaOutput);
+  userData.data = [];
+});
+
 btnDebt.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
-  Debt(userData.data, textareaOutput);
+  closeDebt(userData.data, textareaOutput);
   userData.data = [];
 });
 
@@ -25,7 +34,7 @@ btnSql.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
-  Sql(userData.data, textareaOutput);
+  getSql(userData.data, textareaOutput);
   userData.data = [];
 });
 
