@@ -8,17 +8,16 @@ export default (input, output) => {
       str.innerHTML += csvHeader;
     }
     const firstStr = i.split('\n')[0].split(',');
-    console.log(firstStr);
     firstStr[2] = firstStr[2].replace(/ /g, ',');
     const obj = {
       companyName: firstStr[0],
       occupation: firstStr[1],
       emptyStr: '',
     };
-    const result = i.split('\n')
+    const formatUserData = i.split('\n')
       .slice(1)
       .map((item) => `${Object.values(obj)}${reg(item)}${','.repeat(3)}${1}`)
       .join('\n');
-    str.innerHTML += `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${result}`;
+    str.innerHTML += `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
   });
 };

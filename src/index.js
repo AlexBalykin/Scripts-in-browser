@@ -3,18 +3,18 @@ import getSql from './modules/sql';
 import addDriver from './modules/driver';
 import './index.css';
 
-const btnDebt = document.querySelector('.btn-primary');
-const btnNum = document.querySelector('.btn-secondary');
-const btnSql = document.querySelector('.btn-success');
-const btnReset = document.querySelector('.formOutput');
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');
+const btnDriver = document.querySelector('.btn-secondary');
+const btnDebt = document.querySelector('.btn-primary');
+const btnSql = document.querySelector('.btn-success');
+const btnReset = document.querySelector('.formOutput');
 
 const userData = {
   data: [],
 };
 
-btnNum.addEventListener('click', (e) => {
+btnDriver.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
