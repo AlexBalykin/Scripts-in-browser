@@ -1,5 +1,5 @@
-import closeDebt from './modules/debt';
-import getSql from './modules/sql';
+import Debt from './Modules/Debt';
+import Sql from './Modules/Sql';
 import './index.css';
 
 const btnDebt = document.querySelector('.btn-primary');
@@ -17,7 +17,7 @@ btnDebt.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
-  closeDebt(userData.data, textareaOutput);
+  Debt(userData.data, textareaOutput);
   userData.data = [];
 });
 
@@ -25,7 +25,7 @@ btnSql.addEventListener('click', (e) => {
   e.preventDefault();
   const userText = textareaInput.value;
   userData.data.push(userText);
-  getSql(userData.data, textareaOutput);
+  Sql(userData.data, textareaOutput);
   userData.data = [];
 });
 
