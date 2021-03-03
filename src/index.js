@@ -1,6 +1,4 @@
-import closeDebt from './modules/debt';
-import getSql from './modules/sql';
-import addDriver from './modules/driver';
+import script from './script';
 import './index.css';
 
 const textareaInput = document.querySelector('.textareaInput');
@@ -14,34 +12,27 @@ const userData = {
   data: [],
 };
 
-btnDriver.addEventListener('click', (e) => {
-  e.preventDefault();
-  const userText = textareaInput.value;
-  userData.data.push(userText);
-  addDriver(userData.data, textareaOutput);
-  userData.data = [];
-});
+const listener = (btn, fu) => {
+  if (btn === btnReset) {
+    btn.addEventListener('submit', (e) => {
+      e.preventDefault();
+      textareaOutput.innerHTML = '';
+      textareaInput.innerHTML = '';
+      userData.data = [];
+      e.target.reset();
+    });
+  } else {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const userText = textareaInput.value;
+      userData.data.push(userText);
+      fu(userData.data, textareaOutput);
+      userData.data = [];
+    });
+  }
+};
 
-btnDebt.addEventListener('click', (e) => {
-  e.preventDefault();
-  const userText = textareaInput.value;
-  userData.data.push(userText);
-  closeDebt(userData.data, textareaOutput);
-  userData.data = [];
-});
-
-btnSql.addEventListener('click', (e) => {
-  e.preventDefault();
-  const userText = textareaInput.value;
-  userData.data.push(userText);
-  getSql(userData.data, textareaOutput);
-  userData.data = [];
-});
-
-btnReset.addEventListener('submit', (e) => {
-  e.preventDefault();
-  textareaOutput.innerHTML = '';
-  textareaInput.innerHTML = '';
-  userData.data = [];
-  e.target.reset();
-});
+listener(btnDriver, script.addDriver);
+listener(btnDebt, script.debt);
+listener(btnSql, script.getSql);
+listener(btnReset);
