@@ -22,19 +22,20 @@ const script = {
       } else {
         const formatUserData = i
           .split('\n')
-          .map((item) => `SELECT db_admin.close_debt_transaction('${item.trim()}');`)
+          .map((item) => `SELECT db_admin.close_debt_transaction('${item}');`)
           .join('\n');
         str.innerHTML += formatUserData;
       }
     });
   },
   addDriver: (input, output) => {
+    const reg = (str) => str.replace(/ /g, ',').replace(/[0-9]/g, '');
     const str = output;
-    const reg = (str2) => str2.replace(/ /g, ',').replace(/[0-9]/g, '');
     const csvHeader = 'CompanyName,Occupation,LastName,FirstName,MiddleName,Phone,PersonalNr,TerminalPassword';
+    const example = 'ОАО ПАТП-4 (Новокузнецк),водитель,Ферг Нерман Сбербанкович,,,1';
     input.forEach((i) => {
       if (i.split('\n')[0].length < 15) {
-        str.innerHTML += csvHeader;
+        str.innerHTML += `${csvHeader}${'\n'}${example}`;
       }
       const firstStr = i.split('\n')[0].split(',');
       firstStr[2] = firstStr[2].replace(/ /g, ',');

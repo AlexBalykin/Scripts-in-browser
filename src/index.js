@@ -24,7 +24,11 @@ const listener = (btn, fu) => {
   } else {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const userText = textareaInput.value;
+      if (textareaOutput.innerHTML.length > 0) {
+        textareaOutput.innerHTML = '';
+        userData.data = [];
+      }
+      const userText = textareaInput.value.trim();
       userData.data.push(userText);
       fu(userData.data, textareaOutput);
       userData.data = [];
