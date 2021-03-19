@@ -1,5 +1,6 @@
 import script from './script';
-import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min';
 
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');

@@ -9,8 +9,8 @@ const query = (data) => `SELECT t.id, t.REGION_ID, ts."name" AS Статус, cd
  WHERE t.CARD_ID IN ('${data}')
  AND t.STATUS_ID IN (1,2,4) AND cd.STATUS_ID IN (1,2,4);`;
 
-const script = {
-  debt: (input, output) => {
+export default {
+  debt(input, output) {
     const str = output;
     input.forEach((i) => {
       if (i.split('\n')[0].length < 15) {
@@ -28,7 +28,7 @@ const script = {
       }
     });
   },
-  addDriver: (input, output) => {
+  addDriver(input, output) {
     const reg = (str) => str.replace(/ /g, ',').replace(/[0-9]/g, '');
     const str = output;
     const csvHeader = 'CompanyName,Occupation,LastName,FirstName,MiddleName,Phone,PersonalNr,TerminalPassword';
@@ -51,7 +51,7 @@ const script = {
       str.innerHTML += `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
     });
   },
-  getSql: (input, output) => {
+  getSql(input, output) {
     const str = output;
     input.forEach((userData) => {
       if (userData.split('\n')[0].length > 40) {
@@ -63,5 +63,3 @@ const script = {
     });
   },
 };
-
-export default script;
