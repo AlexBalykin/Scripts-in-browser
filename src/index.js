@@ -8,12 +8,24 @@ const btnDriver = document.querySelector('.btn-secondary');
 const btnDebt = document.querySelector('.btn-primary');
 const btnSql = document.querySelector('.btn-success');
 const btnReset = document.querySelector('.formOutput');
+const btnCsvDownload = document.querySelector('.btn-outline-success');
 
 const userData = {
   data: [],
 };
 
 const listener = (btn, fu) => {
+  if (btn === btnCsvDownload) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const content = textareaOutput.innerHTML;
+      const blob = new Blob([content], { type: 'text/csv' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'driver.csv';
+      link.click();
+    });
+  }
   if (btn === btnReset) {
     btn.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -41,3 +53,4 @@ listener(btnDriver, script.addDriver);
 listener(btnDebt, script.debt);
 listener(btnSql, script.getSql);
 listener(btnReset);
+listener(btnCsvDownload);
