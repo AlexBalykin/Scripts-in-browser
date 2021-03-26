@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.min';
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');
 const btnDriver = document.querySelector('.btn-secondary');
+const btnTerm = document.querySelector('.btn-dark');
 const btnDebt = document.querySelector('.btn-primary');
 const btnSql = document.querySelector('.btn-success');
 const btnReset = document.querySelector('.formOutput');
@@ -21,8 +22,8 @@ const listener = (btn, fu) => {
       const content = textareaOutput.innerHTML;
       const blob = new Blob([content], { type: 'text/csv' });
       const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 'driver.csv';
+      link.href = URL.createObjectURL(blob);
+      link.download = 'output.csv';
       link.click();
     });
   }
@@ -37,14 +38,9 @@ const listener = (btn, fu) => {
   } else {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (textareaOutput.innerHTML.length > 0) {
-        textareaOutput.innerHTML = '';
-        userData.data = [];
-      }
       const userText = textareaInput.value.trim();
       userData.data.push(userText);
       fu(userData.data, textareaOutput);
-      userData.data = [];
     });
   }
 };
@@ -52,5 +48,6 @@ const listener = (btn, fu) => {
 listener(btnDriver, script.addDriver);
 listener(btnDebt, script.debt);
 listener(btnSql, script.getSql);
+listener(btnTerm, script.addTerm);
 listener(btnReset);
 listener(btnCsvDownload);

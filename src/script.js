@@ -12,19 +12,19 @@ const query = (data) => `SELECT t.id, t.REGION_ID, ts."name" AS Статус, cd
 export default {
   debt(input, output) {
     const str = output;
-    input.forEach((i) => {
-      if (i.split('\n')[0].length < 15) {
-        const formatUserData = i
+    input.forEach((userData) => {
+      if (userData.split('\n')[0].length < 15) {
+        const formatUserData = userData
           .split('\n')
           .map((item) => `31064700${item.trim()}`)
           .join('\n');
-        str.innerHTML += formatUserData;
+        str.innerHTML = formatUserData;
       } else {
-        const formatUserData = i
+        const formatUserData = userData
           .split('\n')
           .map((item) => `SELECT db_admin.close_debt_transaction('${item}');`)
           .join('\n');
-        str.innerHTML += formatUserData;
+        str.innerHTML = formatUserData;
       }
     });
   },
@@ -33,22 +33,23 @@ export default {
     const str = output;
     const csvHeader = 'CompanyName,Occupation,LastName,FirstName,MiddleName,Phone,PersonalNr,TerminalPassword';
     const example = 'ОАО ПАТП-4 (Новокузнецк),водитель,Ферг Нерман Сбербанкович,,,1';
-    input.forEach((i) => {
-      if (i.split('\n')[0].length < 15) {
-        str.innerHTML += `${csvHeader}${'\n'}${example}`;
+    input.forEach((userData) => {
+      if (userData.length < 15) {
+        str.innerHTML = `${csvHeader}${'\n'}${example}`;
       }
-      const firstStr = i.split('\n')[0].split(',');
+      const firstStr = userData.split('\n')[0].split(',');
       firstStr[2] = firstStr[2].replace(/ /g, ',');
       const obj = {
         companyName: firstStr[0],
         occupation: firstStr[1],
         emptyStr: '',
       };
-      const formatUserData = i.split('\n')
+      const formatUserData = userData
+        .split('\n')
         .slice(1)
-        .map((item) => `${Object.values(obj)}${reg(item)}${','.repeat(3)}${1}`)
+        .map((item) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(3)}${1}`)
         .join('\n');
-      str.innerHTML += `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
+      str.innerHTML = `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
     });
   },
   getSql(input, output) {
@@ -58,8 +59,47 @@ export default {
         const formatUserData = userData
           .split('\n')
           .map((item) => item.split('\t')[2]);
-        str.innerHTML += query(regexp(formatUserData.join('\n')));
-      } else str.innerHTML += query(regexp(userData));
+        str.innerHTML = query(regexp(formatUserData.join('\n')));
+      } else str.innerHTML = query(regexp(userData));
+    });
+  },
+  addTerm(input, output) {
+    const str = output;
+    const csvHeader = 'Number,CompanyId,RegionId,InventoryNumber,TerminalModelId,VehicleId,Enabled,EcomMerchantId,MerchantCode,StoreNr,Tid,TerminalNr,MccCode,Currency,TerminalOption,TerminalModel,SoftwareVersion,Serial';
+    const example = '22223333,123,1234,1,3,,true,321,111111111111,2222,22223333,3333,4111,643,J1,Q,1,TKP000000001';
+    input.forEach((userData) => {
+      if (userData.length < 15) {
+        str.innerHTML = `${csvHeader}${'\n'}${example}`;
+      } else {
+        const firstStr = userData.split('\n')[0].split(',');
+        const number = userData
+          .split('\n')
+          .slice(1)
+          .map((item) => `${','}${item.trim().slice(0, -4)}${','}${item.trim()}${','}${item.trim().slice(4)}${','}`);
+        const obj = {
+          companyId: firstStr[1],
+          regionId: firstStr[2],
+          inventoryNumber: 1,
+          terminalModelId: firstStr[4],
+          vehicleId: '',
+          enabled: true,
+          ecomMerchantId: firstStr[7],
+          merchantCode: firstStr[8],
+        };
+        const obj2 = {
+          mccCode: 4111,
+          currency: 643,
+          terminalOption: 'J1',
+          terminalModel: 'Q',
+          softwareVersion: 1,
+          serial: 'TKP000000001',
+        };
+        const formatUserData = userData.split('\n')
+          .slice(1)
+          .map((item, n) => `${item.trim()}${','}${Object.values(obj)}${number[n]}${Object.values(obj2)}`)
+          .join('\n');
+        str.innerHTML = `${csvHeader}${'\n'}${firstStr}${'\n'}${formatUserData}`;
+      }
     });
   },
 };
