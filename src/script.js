@@ -32,7 +32,7 @@ export default {
     const reg = (str) => str.replace(/ /g, ',').replace(/[0-9]/g, '');
     const str = output;
     const csvHeader = 'CompanyName,Occupation,LastName,FirstName,MiddleName,Phone,PersonalNr,TerminalPassword';
-    const example = 'ОАО ПАТП-4 (Новокузнецк),водитель,Ферг Нерман Сбербанкович,,,1';
+    const example = 'ОАО ПАТП-4 (Новокузнецк),водитель,Ферг Нерман Сбербанкович,,123,1';
     input.forEach((userData) => {
       if (userData.length < 15) {
         str.innerHTML = `${csvHeader}${'\n'}${example}`;

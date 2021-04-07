@@ -1,6 +1,6 @@
 import script from './script';
+import nav from './navTab';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min';
 
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');
@@ -51,3 +51,4 @@ listener(btnSql, script.getSql);
 listener(btnTerm, script.addTerm);
 listener(btnReset);
 listener(btnCsvDownload);
+nav();
