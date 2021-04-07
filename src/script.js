@@ -37,17 +37,25 @@ export default {
       if (userData.length < 15) {
         str.innerHTML = `${csvHeader}${'\n'}${example}`;
       }
+      const terminalPassword = userData
+        .split('\n')
+        .slice(1)
+        .join()
+        .replace(/\D+/g, ' ')
+        .split(' ')
+        .filter((i) => i.trim());
       const firstStr = userData.split('\n')[0].split(',');
       firstStr[2] = firstStr[2].replace(/ /g, ',');
+      const { 0: companyName, 1: occupation } = firstStr;
       const obj = {
-        companyName: firstStr[0],
-        occupation: firstStr[1],
+        companyName,
+        occupation,
         emptyStr: '',
       };
       const formatUserData = userData
         .split('\n')
         .slice(1)
-        .map((item) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(3)}${1}`)
+        .map((item, t) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(1)}${terminalPassword[t]}${','}${1}`)
         .join('\n');
       str.innerHTML = `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
     });

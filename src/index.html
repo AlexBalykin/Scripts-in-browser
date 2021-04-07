@@ -9,54 +9,50 @@
 </head>
 
 <body>
-    <ul class="nav nav-tabs position-fixed top-0 end-0" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
+    <nav>
+        <div class="nav nav-tabs position-fixed top-0 end-0">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true" accesskey="5"><i
-                    class="bi bi-house-door"></i></button>
-        </li>
-        <li class="nav-item" role="presentation">
+                accesskey="5"><i class="bi bi-house-door"></i></button>
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false" accesskey="4"><i
-                    class="bi bi-book"></i></button>
-        </li>
-    </ul>
-    <div class="tab-content " id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                accesskey="4"><i class="bi bi-book"></i></button>
+        </div>
+    </nav>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="home">
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
                         <form class="formInput">
-                            <textarea class="textareaInput" cols="100" rows="15" accesskey="1" autofocus></textarea>
-                            <p><button type="button" class="btn btn-primary" accesskey="q">Debt</button>
+                            <textarea class="textareaInput mt-3" cols="100" rows="15" accesskey="1" autofocus></textarea>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-primary" accesskey="q">Debt</button>
                                 <button type="button" class="btn btn-secondary" accesskey="w">Driver</button>
                                 <button type="button" class="btn btn-dark" accesskey="a">Term</button>
                                 <button type="button" class="btn btn-success" accesskey="s">Sql</button>
-                            </p>
+                            </div>
                         </form>
-
                         <form class="formOutput">
                             <textarea class="textareaOutput" cols="100" rows="15" accesskey="2"></textarea>
-                            <p><button class="btn btn-outline-secondary" accesskey="3"><i class="bi bi-trash"></i>
-                                    Reset</button>
+                            <div>
+                                <button class="btn btn-outline-secondary" accesskey="3"><i
+                                        class="bi bi-trash"></i>Reset</button>
                                 <button type="button" class="btn btn-outline-success" accesskey="6"><i
-                                        class="bi bi-download"></i>
-                                    Csv</button>
-                            </p>
+                                        class="bi bi-download"></i>Csv</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade text-center" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade text-center mt-3" id="profile">
             <iframe width="640" height="360" src="https://www.youtube.com/embed/KXmV8C7DKQE"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            <div class="container">
+                allowfullscreen>
+            </iframe>
+            <div class="container mt-3">
                 <div class="row">
-                    <div class="col">
-                        <p>
+                    <div class="col-8 mx-auto">
                         <table class="table table-hover">
                             <thead>
                                 <tr class="table-secondary">
@@ -102,7 +98,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        </p>
                     </div>
                 </div>
             </div>
