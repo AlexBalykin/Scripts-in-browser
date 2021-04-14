@@ -1,6 +1,5 @@
 import script from './script';
 import nav from './navTab';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 
 const textareaInput = document.querySelector('.textareaInput');
