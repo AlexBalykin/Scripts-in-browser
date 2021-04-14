@@ -18,13 +18,13 @@ export default {
           .split('\n')
           .map((item) => `31064700${item.trim()}`)
           .join('\n');
-        str.innerHTML = formatUserData;
+        str.textContent = formatUserData;
       } else {
         const formatUserData = userData
           .split('\n')
           .map((item) => `SELECT db_admin.close_debt_transaction('${item}');`)
           .join('\n');
-        str.innerHTML = formatUserData;
+        str.textContent = formatUserData;
       }
     });
   },
@@ -35,7 +35,7 @@ export default {
     const example = 'ОАО ПАТП-4 (Новокузнецк),водитель,Ферг Нерман Сбербанкович,,123,1';
     input.forEach((userData) => {
       if (userData.length < 15) {
-        str.innerHTML = `${csvHeader}${'\n'}${example}`;
+        str.textContent = `${csvHeader}${'\n'}${example}`;
       }
       const terminalPassword = userData
         .split('\n')
@@ -57,7 +57,7 @@ export default {
         .slice(1)
         .map((item, t) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(1)}${terminalPassword[t]}${','}${1}`)
         .join('\n');
-      str.innerHTML = `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
+      str.textContent = `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
     });
   },
   getSql(input, output) {
@@ -67,8 +67,8 @@ export default {
         const formatUserData = userData
           .split('\n')
           .map((item) => item.split('\t')[2]);
-        str.innerHTML = query(regexp(formatUserData.join('\n')));
-      } else str.innerHTML = query(regexp(userData));
+        str.textContent = query(regexp(formatUserData.join('\n')));
+      } else str.textContent = query(regexp(userData));
     });
   },
   addTerm(input, output) {
@@ -77,7 +77,7 @@ export default {
     const example = '22223333,123,1234,1,3,,true,321,111111111111,2222,22223333,3333,4111,643,J1,Q,1,TKP000000001';
     input.forEach((userData) => {
       if (userData.length < 15) {
-        str.innerHTML = `${csvHeader}${'\n'}${example}`;
+        str.textContent = `${csvHeader}${'\n'}${example}`;
       } else {
         const firstStr = userData.split('\n')[0].split(',');
         const number = userData
@@ -106,7 +106,7 @@ export default {
           .slice(1)
           .map((item, n) => `${item.trim()}${','}${Object.values(obj)}${number[n]}${Object.values(obj2)}`)
           .join('\n');
-        str.innerHTML = `${csvHeader}${'\n'}${firstStr}${'\n'}${formatUserData}`;
+        str.textContent = `${csvHeader}${'\n'}${firstStr}${'\n'}${formatUserData}`;
       }
     });
   },

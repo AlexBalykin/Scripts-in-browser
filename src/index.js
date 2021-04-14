@@ -1,6 +1,7 @@
 import script from './script';
 import nav from './navTab';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
 
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');
@@ -34,6 +35,7 @@ const listener = (btn, fu) => {
       textareaInput.innerHTML = '';
       userData.data = [];
       e.target.reset();
+      textareaInput.focus();
     });
   } else {
     btn.addEventListener('click', (e) => {
@@ -43,6 +45,7 @@ const listener = (btn, fu) => {
       fu(userData.data, textareaOutput);
     });
   }
+  textareaInput.focus();
 };
 
 listener(btnDriver, script.addDriver);

@@ -1,0 +1,11 @@
+.textareaOutput {
+  width: 80%;
+  &:focus {
+    border-color: black;
+    box-shadow: none;
+  }
+}
+
+.textareaInput {
+  width: 80%;
+}
