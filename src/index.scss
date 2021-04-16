@@ -1,13 +1,17 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
-.textareaOutput {
-  width: 80%;
+@mixin textarea($width: 80%, $shadow: none, $border-color: default) {
+  width: $width;
   &:focus {
-    border-color: black;
-    box-shadow: none;
+    box-shadow: $shadow;
+    border-color: $border-color;
   }
 }
 
 .textareaInput {
-  width: 80%;
+  @include textarea;
+}
+
+.textareaOutput {
+  @include textarea(80%, none, black);
 }

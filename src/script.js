@@ -55,7 +55,7 @@ export default {
       const formatUserData = userData
         .split('\n')
         .slice(1)
-        .map((item, t) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(1)}${terminalPassword[t]}${','}${1}`)
+        .map((item, t) => `${Object.values(obj)}${reg(item.trim())}${','.repeat(1)}${terminalPassword[t] ?? ','}${','}${1}`)
         .join('\n');
       str.textContent = `${csvHeader}${'\n'}${firstStr.join()}${'\n'}${formatUserData}`;
     });
