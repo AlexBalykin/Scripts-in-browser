@@ -6,6 +6,9 @@ install-deps:
 lint:
 	npx eslint .
 
+test:
+	npx jest
+
 build:
 	NODE_ENV=production npx webpack
 
