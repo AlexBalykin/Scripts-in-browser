@@ -1,39 +1,28 @@
 import script from './script';
-import nav from './navTab';
+import { downloader, navTab } from './tools';
 import './index.scss';
 
 const textareaInput = document.querySelector('.textareaInput');
 const textareaOutput = document.querySelector('.textareaOutput');
-const btnDriver = document.querySelector('.btn-secondary');
-const btnTerm = document.querySelector('.btn-dark');
-const btnDebt = document.querySelector('.btn-primary');
-const btnSql = document.querySelector('.btn-success');
+const btnDriver = document.querySelector('.driver');
+const btnTerm = document.querySelector('.term');
+const btnDebt = document.querySelector('.debt');
+const btnSql = document.querySelector('.sql');
 const btnReset = document.querySelector('.formOutput');
-const btnGrz = document.querySelector('.btn-danger');
-const btnCsvDownload = document.querySelector('.btn-outline-success');
+const btnGrz = document.querySelector('.grz');
+const btnExport = document.querySelector('.export');
 
 const userData = {
   data: [],
 };
 
 const listener = (btn, fu) => {
-  if (btn === btnCsvDownload) {
+  if (btn === btnExport) {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const content = textareaOutput.innerHTML;
-      if (content.split('\n')[0].length < 20) {
-        const blob = new Blob([content], { type: 'text/txt' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'grz.txt';
-        link.click();
-      } else {
-        const blob = new Blob([content], { type: 'text/csv' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'output.csv';
-        link.click();
-      }
+      const exportData = textareaOutput.innerHTML
+        .split('\n')[0].length < 20 ? downloader('grz.txt', 'text/txt', textareaOutput) : downloader('output.csv', 'text/csv', textareaOutput);
+      return exportData;
     });
   }
   if (btn === btnReset) {
@@ -62,5 +51,5 @@ listener(btnSql, script.getSql);
 listener(btnTerm, script.addTerm);
 listener(btnGrz, script.grz);
 listener(btnReset);
-listener(btnCsvDownload);
-nav();
+listener(btnExport);
+navTab();

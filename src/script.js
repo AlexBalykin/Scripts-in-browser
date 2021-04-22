@@ -1,39 +1,4 @@
-const regexp = (str) => str.replace(/\r?\n/g, "','").split('\n').join().trim();
-const query = (data) => `SELECT t.id, t.REGION_ID, ts."name" AS Статус, cdts."name" AS Статус_долга, ct."name" AS Карта
- FROM BILLING."transaction" t
- LEFT JOIN CARD_DEBT_TRANSACTION cd ON t.ID = cd.TRANSACTION_ID
- LEFT JOIN TRANSACTION_STATUS TS ON t.STATUS_ID = ts.ID
- LEFT JOIN CARD_DEBT_TRANSACTION_STATUS CDTS ON cd.STATUS_ID = cdts.ID
- LEFT JOIN CARD C ON t.CARD_ID=c.ID
- LEFT JOIN CARD_TYPE CT ON ct.ID=c.TYPE_ID
- WHERE t.CARD_ID IN ('${data}')
- AND t.STATUS_ID IN (1,2,4) AND cd.STATUS_ID IN (1,2,4);`;
-const pattern = {
-  С: 'C',
-  с: 'c',
-  Е: 'E',
-  е: 'e',
-  Ё: 'E',
-  ё: 'e',
-  Т: 'T',
-  О: 'O',
-  о: 'o',
-  р: 'p',
-  Р: 'P',
-  А: 'A',
-  а: 'a',
-  Н: 'H',
-  н: 'H',
-  К: 'K',
-  к: 'k',
-  Х: 'X',
-  х: 'x',
-  В: 'B',
-  в: 'B',
-  М: 'M',
-  У: 'Y',
-  у: 'Y',
-};
+import { regexp, query, pattern } from './tools';
 
 export default {
   debt(input, output) {
