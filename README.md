@@ -1,2 +1,3 @@
 [![Node CI](https://github.com/AlexBalykin/Scripts-in-browser/workflows/Node%20CI/badge.svg)](https://github.com/AlexBalykin/Scripts-in-browser/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8bafc2b438abf58fc481/maintainability)](https://codeclimate.com/github/AlexBalykin/Scripts-in-browser/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8bafc2b438abf58fc481/test_coverage)](https://codeclimate.com/github/AlexBalykin/Scripts-in-browser/test_coverage)

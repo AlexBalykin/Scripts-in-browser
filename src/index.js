@@ -20,8 +20,9 @@ const listener = (btn, scriptMethod) => {
   if (btn === btnExport) {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const exportData = textareaOutput.innerHTML
-        .split('\n')[0].length < 20 ? downloader('grz.txt', 'text/txt', textareaOutput) : downloader('output.csv', 'text/csv', textareaOutput);
+      const exportData = textareaOutput.innerHTML.split('\n')[0].length < 20
+        ? downloader('grz.txt', 'text/txt', textareaOutput)
+        : downloader('output.csv', 'text/csv', textareaOutput);
       return exportData;
     });
   }
@@ -32,7 +33,6 @@ const listener = (btn, scriptMethod) => {
       textareaInput.innerHTML = '';
       userData.data = [];
       e.target.reset();
-      textareaInput.value = '';
       textareaInput.focus();
     });
   } else {

@@ -10,7 +10,7 @@ test:
 	npx jest
 
 test-coverage:
-	npx jest coverage	
+	npx jest --coverage
 
 build:
 	NODE_ENV=production npx webpack
