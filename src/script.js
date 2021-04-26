@@ -13,7 +13,7 @@ export default {
       } else {
         const formatUserData = userData
           .split('\n')
-          .map((item) => `SELECT db_admin.close_debt_transaction('${item}');`)
+          .map((item) => `SELECT db_admin.close_debt_transaction('${item.trim()}');`)
           .join('\n');
         str.textContent = formatUserData;
       }

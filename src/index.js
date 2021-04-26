@@ -16,7 +16,7 @@ const userData = {
   data: [],
 };
 
-const listener = (btn, fu) => {
+const listener = (btn, scriptMethod) => {
   if (btn === btnExport) {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -32,6 +32,7 @@ const listener = (btn, fu) => {
       textareaInput.innerHTML = '';
       userData.data = [];
       e.target.reset();
+      textareaInput.value = '';
       textareaInput.focus();
     });
   } else {
@@ -39,7 +40,7 @@ const listener = (btn, fu) => {
       e.preventDefault();
       const userText = textareaInput.value.trim();
       userData.data.push(userText);
-      fu(userData.data, textareaOutput);
+      scriptMethod(userData.data, textareaOutput);
     });
   }
   textareaInput.focus();
