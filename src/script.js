@@ -87,15 +87,18 @@ export default {
           .split('\n')
           .slice(1)
           .map((item) => `${','}${item.trim().slice(0, -4)}${','}${item.trim()}${','}${item.trim().slice(4)}${','}`);
+        const {
+          1: companyId, 2: regionId, 4: terminalModelId, 7: ecomMerchantId, 8: merchantCode,
+        } = firstStr;
         const obj = {
-          companyId: firstStr[1],
-          regionId: firstStr[2],
+          companyId,
+          regionId,
           inventoryNumber: 1,
-          terminalModelId: firstStr[4],
+          terminalModelId,
           vehicleId: '',
           enabled: true,
-          ecomMerchantId: firstStr[7],
-          merchantCode: firstStr[8],
+          ecomMerchantId,
+          merchantCode,
         };
         const obj2 = {
           mccCode: 4111,
